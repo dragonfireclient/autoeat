@@ -70,3 +70,5 @@ minetest.after(3, function()
 		hud_id = i
 	end
 end)
+
+minetest.register_cheat("AutoEat", "Player", "autoeat")
