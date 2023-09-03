@@ -58,17 +58,20 @@ minetest.register_globalstep(function(dtime)
 	end
 end)
 
-minetest.after(3, function()
+local function find_hud()
 	local player = minetest.localplayer
+	if not player then minetest.after(3,find_hud) end
 	local def
 	local i = -1
 	repeat
 		i = i + 1
-		def = player:hud_get(i)
+		def = player and player:hud_get(i)
 	until not def or def.text == "hbhunger_icon.png"
 	if def then
 		hud_id = i
 	end
-end)
+end
+
+minetest.after(3, find_hud)
 
 minetest.register_cheat("AutoEat", "Player", "autoeat")
